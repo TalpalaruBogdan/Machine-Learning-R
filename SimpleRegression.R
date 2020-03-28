@@ -1,25 +1,18 @@
-#Install libraries
-#install.packages("keras")
-#install_keras()
-#install.packages("neuralnet")
 
 #refference libraries
-#library("keras")
 library("neuralnet")
 # load library
 require(neuralnet)
 
-
+#Set seed
 set.seed(1)
-
-#Citesc din csv intr-un dataset
-#irisData <- read.csv("C:/Users/bogdant/Desktop/iris.csv", header = FALSE, col.names=c("sepal.length","sepal.width","petal.length","petal.width","species"))
 
 # creating training data set
 TKS=c(1,0,0,0,1,1)
 CSS=c(1,0,1,0,1,0)
 Placed=c(1,0,0,0,1,1)
-# Here, you will combine multiple columns or features into a single set of data
+
+# Combine arrays in data frame
 df=data.frame(TKS,CSS,Placed)
 
 
@@ -30,12 +23,7 @@ nn=neuralnet(Placed~TKS+CSS,
              hidden=c(10,10),
              act.fct = "logistic",
              linear.output = FALSE)
-
-#- Placed~TKS+CSS, Placed is label annd TKS and CSS are features.
-#- df is dataframe,
-#- hidden=3: represents single layer with 3 neurons respectively.
-#- act.fct = "logistic" used for smoothing the result.
-#- linear.ouput=FALSE: set FALSE for apply act.fct otherwise TRUE
+#- Placed~TKS+CSS, Placed is label and TKS and CSS are features.
 
 # plot neural network
 plot(nn)
@@ -45,7 +33,7 @@ TKS=c(0,0,1)
 CSS=c(1,0,0)
 test=data.frame(TKS,CSS)
 
-## Prediction using neural network
+# Prediction using neural network
 Predict=compute(nn,test)
 Predict$net.result
 
